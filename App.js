@@ -3,11 +3,14 @@ import { StyleSheet, Text, TouchableNativeFeedbackComponent, Pressable, Button, 
 import Icon from "@expo/vector-icons/Entypo";
 import { AntDesign } from "@expo/vector-icons";
 import React, { Component } from 'react';
-import tempData from './tempData';
+import tempJobData from './tempJobData';
+import tempRobotData from './tempRobotData';
 import Jobs from './components/Jobs';
+import Robots from './components/Robots';
 
 
 export default class Detail extends React.Component {
+
   state = {
     jobsSelected: true //start at jobs tab
   }
@@ -79,6 +82,8 @@ export default class Detail extends React.Component {
           </TouchableOpacity>
           <Text styles={styles.addJobText}>Add Job</Text>
         </View>
+
+
         {/* nav bar */}
         <View style={styles.navBar}>
           <TouchableOpacity
@@ -90,7 +95,6 @@ export default class Detail extends React.Component {
             }}
           >
             <Text style={{
-              // fontFamily:"Bold",
               color: this.state.jobsSelected ? "#CCC7B9" : "#9ca1a2"
             }}>JOBS IN PROGRESS</Text>
 
@@ -114,15 +118,31 @@ export default class Detail extends React.Component {
 
         {/* job list components */}
         <View style={styles.jobList}>
-          <FlatList
-            data={tempData}
-            keyExtractor={item => item.name}
-            horizontal={true}
-            showHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <Jobs job={item} />
-            )}
-          />
+          {this.state.jobsSelected ?
+            //job page selected  
+            <FlatList
+              data={tempJobData}
+              keyExtractor={item => item.name}
+              horizontal={true}
+              showHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <Jobs job={item} />
+              )}
+            />
+            :
+            //robot page selected  
+            <FlatList
+              data={tempRobotData}
+              keyExtractor={item => item.name}
+              horizontal={true}
+              showHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <Robots robot={item} />
+              )}
+            />
+          }
+
+
         </View>
         {/* button */}
         <Pressable style={styles.button} onPress={() => Alert.alert('Dashboard in Progress')}>

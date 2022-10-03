@@ -33,7 +33,7 @@ export default tempData = [
         time: "21",
         info: [
             {
-                robot: "NancyBot",
+                robot: "SteveBot",
                 completed: false
             }
         ]
